@@ -7,11 +7,11 @@ import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
-  gql
+  gql,
 } from '@apollo/client';
 
 const client = new ApolloClient({
-  uri: 'https://users-messages-gql.herokuapp.com/graphql',
+  uri: 'https://rickandmortyapi.com/graphql',
   cache: new InMemoryCache(),
 });
 
@@ -20,9 +20,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   // <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>
   // </React.StrictMode>
 );
 
