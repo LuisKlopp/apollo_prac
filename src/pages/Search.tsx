@@ -13,6 +13,14 @@ const GET_CHARACTER_LOCATIONS = gql`
   }
 `;
 
+interface IResult {
+  __typename: string;
+  location: {
+    name: string;
+    __typename: string;
+  };
+}
+
 const Search = () => {
   const [name, setName] = useState('');
 
@@ -25,12 +33,23 @@ const Search = () => {
     }
   );
 
-  console.log({ loading, error, called, data });
+  console.log(data?.characters.results);
 
   return (
     <div>
       <input value={name} onChange={(e) => setName(e.target.value)}></input>
       <button onClick={() => getLocations()}>search</button>
+      {loading && <div>spinners...</div>}
+      {error && <div>someting went wrong</div>}
+      {data && (
+        <ul>
+          {data.characters.results.map((character: IResult) => {
+            return (
+              <li key={character.location.name}>{character.location.name}</li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 };
